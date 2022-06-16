@@ -76,7 +76,15 @@ text_5s = [
     "I am dying, Maximus. When a man sees his end, he wants to know there was some purpose to his life. How will the world speak my name in years to come? Will I be known as the philosopher? The warrior? The tyrant?" %gladiator
     "You sound like my nephew, always thinking you need to do things on your own without anyone's support. There is nothing wrong with letting the people who love you help you." % atla
 ];
-save("text_5s.mat", "text_5s");
+save("text_5s.mat", "resources/text/text_5s");
+
+for i = 1:length(text_5s)
+    filename = sprintf("resources/audio/5/%i.txt", i);
+    text_line = text_5s(i);
+    fileID = fopen(filename,'wt');
+    fprintf(fileID, char(text_line));
+    fclose(fileID);
+end
 
 
 %% 15s
@@ -106,7 +114,15 @@ text_15s = [
     "He dropped the ball. While most people would think that this was a metaphor of some type, in Joe's case it was absolutely literal. He had hopes of reaching the Major League and that dream was now it great jeopardy. All because he had dropped the ball."
     "There was a leak in the boat. Nobody had yet noticed it, and nobody would for the next couple of hours. This was a problem since the boat was heading out to sea and while the leak was quite small at the moment, it would be much larger when it was ultimately discovered. John had planned it exactly this way."
 ];
-save("text_15s.mat", "text_15s");
+save("text_15s.mat", "resources/text/text_15s");
+
+for i = 1:length(text_15s)
+    filename = sprintf("resources/audio/15/%i.txt", i);
+    text_line = text_15s(i);
+    fileID = fopen(filename,'wt');
+    fprintf(fileID, char(text_line));
+    fclose(fileID);
+end
 
 
 %% 30s
@@ -124,7 +140,7 @@ text_30s = [
     "She nervously peered over the edge. She understood in her mind that the view was supposed to be beautiful, but all she felt was fear. There had always been something about heights that disturbed her, and now she could feel the full force of this unease. She reluctantly crept a little closer with the encouragement of her friends as the fear continued to build. She couldn't help but feel that something horrible was about to happen.\n\nSometimes it just doesn't make sense. The man walking down the street in a banana suit. The llama standing in the middle of the road. The fairies dancing in front of the car window. The fact that all of this was actually happening and wasn't a dream."
     "Then came the night of the first falling star. It was seen early in the morning, rushing over Winchester eastward, a line of flame high in the atmosphere. Hundreds must have seen it and taken it for an ordinary falling star. It seemed that it fell to earth about one hundred miles east of him.\n\nThe shoes had been there for as long as anyone could remember. In fact, it was difficult for anyone to come up with a date they had first appeared. It had seemed they'd always been there and yet they seemed so out of place. Why nobody had removed them was a question that had been asked time and again, but while they all thought it, nobody had ever found the energy to actually do it. So, the shoes remained on the steps, out of place in one sense, but perfectly normal in another."
 ];
-save("text_30s.mat", "text_30s");
+save("text_30s.mat", "resources/text/text_30s");
 
 
 %% 60s
@@ -136,4 +152,12 @@ text_60s = [
     "He watched as the young man tried to impress everyone in the room with his intelligence. There was no doubt that he was smart. The fact that he was more intelligent than anyone else in the room could have been easily deduced, but nobody was really paying any attention due to the fact that it was also obvious that the young man only cared about his intelligence.\n\nHis parents continued to question him. He didn't know what to say to them since they refused to believe the truth. He explained again and again, and they dismissed his explanation as a figment of his imagination. There was no way that grandpa, who had been dead for five years, could have told him where the treasure had been hidden. Of course, it didn't help that grandpa was roaring with laughter in the chair next to him as he tried to explain once again how he'd found it.\n\nThey had made it to Las Vegas, wide-eyed and with so much hope and energy. They had planned the trip for more than a year and both were so excited they could barely control themselves. They still hadn't realized that Las Vegas promised a place where dreams come true, it was actually the place where dreams came to die.\n\nShe patiently waited for his number to be called. She had no desire to be there, but her mom had insisted that she go. She's resisted at first, but over time she realized it was simply easier to appease her and go. Mom tended to be that way. She would keep insisting until you wore down and did what she wanted. So, here she sat, patiently waiting for her number to be called."
     "The answer was within her reach. It was hidden in a box and now that box sat directly in front of her. She'd spent years searching for it and could hardly believe she'd finally managed to find it. She turned the key to unlock the box and then gently lifted the top. She held her breath in anticipation of finally knowing the answer she had spent so much of her time in search of. As the lid came off, she could see that the box was empty.\n\nShe was aware that things could go wrong. In fact, she had trained her entire life in anticipation that things would go wrong one day. She had quiet confidence as she started to see that this was the day that all her training would be worthwhile and useful. At this point, she had no idea just how wrong everything would go that day.\n\nThe computer wouldn't start. She banged on the side and tried again. Nothing. She lifted it up and dropped it to the table. Still nothing. She banged her closed fist against the top. It was at this moment she saw the irony of trying to fix the machine with violence.\n\nJosh had spent year and year accumulating the information. He knew it inside out and if there was ever anyone looking for an expert in the field, Josh would be the one to call. The problem was that there was nobody interested in the information besides him, and he knew it. Years of information painstakingly memorized and sorted with not a sole giving even an ounce of interest in the topic."
 ];
-save("text_60s.mat", "text_60s");
+save("text_60s.mat", "resources/text/text_60s");
+
+for i = 1:length(text_60s)
+    filename = sprintf("resuorces/audio/60/text/%i.txt", i);
+    text_line = text_60s(i);
+    fileID = fopen(filename,'wt');
+    fprintf(fileID, char(text_line));
+    fclose(fileID);
+end

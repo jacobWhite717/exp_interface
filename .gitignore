@@ -3,3 +3,6 @@ end_saves/
 img/
 PTB_Beta/
 templates/
+audio/
+tests/
+*.asv
