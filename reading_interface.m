@@ -3,11 +3,10 @@ close all;
 clear;
 
 % Participat setup
-SUBJECT_NUM = 1;
-SUBJECT_NUM = mod(SUBJECT_NUM-1, 6)+1;
-
+SUBJECT_NUM = 15;
+% SUBJECT_NUM = mod(SUBJECT_NUM-1, 6)+1;0
 trial_perms = flip(perms([5, 15, 60]));
-trial_perm = trial_perms(SUBJECT_NUM,:);
+trial_perm = trial_perms(mod(SUBJECT_NUM-1, 6)+1,:);
 
 %% PTB video setup
 Screen('Preference', 'SkipSyncTests', 1);
@@ -81,7 +80,7 @@ nrchannels = 1;
 sampling_rate = 22050;
 volume = 0.5;
 
-pahandle = PsychPortAudio('Open', 2, 1, 1, sampling_rate, nrchannels);
+pahandle = PsychPortAudio('Open', 1, 1, 1, sampling_rate, nrchannels);
 PsychPortAudio('Volume', pahandle, volume);
 
 
@@ -103,34 +102,33 @@ trigger_buffer_dur = 0;
 block_count = 1;
 
 
-%% intro eyes open/closed
-text = '60 seconds eyes-closed baseline\n\nPress <space> to begin';
-DrawFormattedText(window, text,...
-        'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
-Screen('Flip', window);
-KbWait([], 3, inf);
-
-Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
-Screen('Flip', window);
-
-tbox.trigger(3);
-WaitSecs(60);  
-tbox.trigger(5);
+% %% intro eyes open/closed
+% text = '60 seconds eyes-closed baseline\n\nPress <space> to begin';
+% DrawFormattedText(window, text,...
+%         'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
+% Screen('Flip', window);
 % KbWait([], 3, inf);
-
-
-text = '60 seconds eyes-open baseline\n\nPress <space> to begin';
-DrawFormattedText(window, text,...
-        'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
-Screen('Flip', window);
-KbWait([], 3, inf);
-
-Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
-Screen('Flip', window);
-
-tbox.trigger(4);
-WaitSecs(60);
-tbox.trigger(5);
+% 
+% Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
+% Screen('Flip', window);
+% 
+% tbox.trigger(3);
+% WaitSecs(60);  
+% tbox.trigger(5);
+% % KbWait([], 3, inf);
+% 
+% text = '60 seconds eyes-open baseline\n\nPress <space> to begin';
+% DrawFormattedText(window, text,...
+%         'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
+% Screen('Flip', window);
+% KbWait([], 3, inf);
+% 
+% Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
+% Screen('Flip', window);
+% 
+% tbox.trigger(4);
+% WaitSecs(60);
+% tbox.trigger(5);
 % KbWait([], 3, inf);
 
 
@@ -264,39 +262,43 @@ end
 
 
 %% outro eyes open/closed
-text = '60 seconds eyes-closed baseline\n\nPress <space> to begin';
-DrawFormattedText(window, text,...
-        'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
-Screen('Flip', window);
-KbWait([], 3, inf);
-
-Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
-Screen('Flip', window);
-
-tbox.trigger(3);
-WaitSecs(60);  
-tbox.trigger(5);
+% text = '60 seconds eyes-closed baseline\n\nPress <space> to begin';
+% DrawFormattedText(window, text,...
+%         'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
+% Screen('Flip', window);
 % KbWait([], 3, inf);
-
-
-text = '60 seconds eyes-open baseline\n\nPress <space> to begin';
-DrawFormattedText(window, text,...
-        'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
-Screen('Flip', window);
-KbWait([], 3, inf);
-
-Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
-Screen('Flip', window);
-
-tbox.trigger(4);
-WaitSecs(60);
+% 
+% Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
+% Screen('Flip', window);
+% 
+% tbox.trigger(3);
+% WaitSecs(60);  
+% tbox.trigger(5);
+% % KbWait([], 3, inf);
+% 
+% 
+% text = '60 seconds eyes-open baseline\n\nPress <space> to begin';
+% DrawFormattedText(window, text,...
+%         'center', 'center', light_grey, 100, 0, 0, 1.5, 0, full_boundary_box); 
+% Screen('Flip', window);
+% KbWait([], 3, inf);
+% 
+% Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);
+% Screen('Flip', window);
+% 
+% tbox.trigger(4);
+% WaitSecs(60);
 tbox.trigger(5);
 % KbWait([], 3, inf);
 
 
 %% closing code
+tbox.disconnect();
 PsychPortAudio('Close', pahandle);
 sca;
+
+savefile = sprintf("end_saves/p%i.mat", SUBJECT_NUM);
+save(savefile)      
 
 
 %% helper functions 

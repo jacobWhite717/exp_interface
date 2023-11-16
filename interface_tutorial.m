@@ -2,7 +2,7 @@ sca;
 close all;
 clear;
 
-%% PTB setup
+%% PTB setup    
 Screen('Preference', 'SkipSyncTests', 1);
 PsychDefaultSetup(2);
 screens = Screen('Screens'); 
@@ -57,8 +57,15 @@ nrchannels = 1;
 sampling_rate = 22050;
 volume = 0.5;
 
-pahandle = PsychPortAudio('Open', 2, 1, 1, sampling_rate, nrchannels);
+pahandle = PsychPortAudio('Open', 2   , 1, 1, sampling_rate, nrchannels);
 PsychPortAudio('Volume', pahandle, volume);
+
+
+%% Triggerbox / Serial I/O setup
+% serial_port = 'COM3';  % CHANGE TO APPROPRIATE PORT
+% baud_rate = 115200;
+% inter_trigger_interval = 0.005;
+% tbox = SerialTrigger(serial_port, baud_rate, inter_trigger_interval);
 
 
 %% TRIAL PARAMETERS
@@ -79,7 +86,7 @@ num_trials = 3;
 
 num_blocks = 1;
 
-full_trial_order = [1; 2; 0];
+full_trial_order = [1];%; 2; 0];
 
 text_order = [2];
 reading_counter = 1;
@@ -89,6 +96,7 @@ listening_counter = 1;
 
 % instuction spalsh screen at start of task
 instructions_loc = sprintf('resources/img/%is_instructions.png', trial_dur);
+% instructions_loc = sprintf('resources/img/5s_instructions.png');
 img_instruct = imread(instructions_loc);
 texture_instruct = Screen('MakeTexture', window, img_instruct);
 Screen('DrawTexture', window, texture_instruct, [], [], 0);
@@ -137,23 +145,33 @@ for i = 1:num_trials
     
     t_start = tic;
     Screen('Flip', window);
-    if listening_flag
-        PsychPortAudio('Start', pahandle, 1, 0, 1);
-    end
+%     if listening_flag
+%         PsychPortAudio('Start', pahandle, 1, 0, 1);
+%     end
+
+%     if reading_flag
+%         tbox.trigger(1);
+%     elseif listening_flag
+%         tbox.trigger(6);
+%     else
+%         tbox.trigger(2);
+%     end
 
     WaitSecs(trial_dur); 
     
-    if listening_flag
-        PsychPortAudio('Stop', pahandle);
-    end
+%     if listening_flag
+%         PsychPortAudio('Stop', pahandle);
+%     end
     t_latency = toc(t_start);
 
     WaitSecs(trial_dur+1-t_latency);
+
+%     tbox.trigger(5);
     
 
     %% start of rest 
-    Screen('FillRect', window, blue_grey);
-    Screen('Flip', window);
+%     Screen('FillRect', window, blue_grey);
+%     Screen('Flip', window);
     WaitSecs(rest_time);
 
 
@@ -170,6 +188,7 @@ end
 
 
 %% closing code
+% tbox.disconnect();
 PsychPortAudio('Close', pahandle);
 sca;
 

@@ -37,9 +37,17 @@ classdef SerialTrigger
             fopen(obj.serial_connection);
         end
 
+        function delete(obj)
+            obj.disconnect();
+        end
+
         function startUp(obj)
             fwrite(obj.serial_connection, 0,'sync');
             pause(obj.inter_trigger_interval);
+        end
+
+        function disconnect(obj)
+            fclose(obj.serial_connection);
         end
         
         function trigger(obj, trigger_num)
