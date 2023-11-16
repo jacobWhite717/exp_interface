@@ -1,5 +1,8 @@
 # exp_interface
 
+Used to collect the data for [this dataset](https://github.com/jacobWhite717/EEG_data).
+
+### Relevant files
 **interface_tutorial.m** was used to briefly teach the participant how the session would work.
 
 **reading_interface.m** was used for the actual session to record data.
